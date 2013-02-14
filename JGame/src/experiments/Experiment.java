@@ -1,18 +1,18 @@
-package game;
+package experiments;
 
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.LWJGLException;
 
-public final class Game {
+public final class Experiment {
     
     // Display constants
     private final int DISPLAY_WIDTH = 640;
     private final int DISPLAY_HEIGHT = 480;
     
     
-    public Game() {
+    public Experiment() {
         
     } // end Game()
     
