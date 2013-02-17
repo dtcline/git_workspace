@@ -36,7 +36,7 @@ public final class Experiment {
         
         
         long stopTime = System.currentTimeMillis();
-        System.out.println("Finished in " + (stopTime - startTime) + " milliseconds.");
+        System.out.println("Finished in " + (float)(stopTime - startTime) / 1000.0f + " seconds.");
     } // end run()
     
     
@@ -66,15 +66,17 @@ public final class Experiment {
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        // call glTranslate(float,float,float) to move the screen
-        
         // call glBegin to render static objects
-        
+        glBegin(GL_POINTS);
+        for (int i = 0; i < 50; i++) {
+        	for (int j = 0; j < 50; j++) {
+        		if (i % 2 == 0 && j % 2 == 0) {
+        			glVertex2i(i, j);
+        		}
+        	}
+        }
+        glEnd();
         // call glEnd
-        
-        // Poll for input
-        
-        // Update the display
         
         // Wait until the frame-rate is 60fps
         //Display.sync(60);
@@ -82,7 +84,7 @@ public final class Experiment {
     
     
     private void update() {
-        
+        System.out.println(Display.getWidth() + " x " + Display.getHeight());
     } // end update(int)
 
 } // end Game class
