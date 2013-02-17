@@ -21,12 +21,9 @@ public final class Particle {
         
         velocity = new double[positionLength];
         for (int i = 0; i < positionLength; i++) {
-            if (random.nextBoolean()) {
-                velocity[i] = random.nextDouble() * velocityMax;
-            }
-            else {
-                velocity[i] = random.nextDouble() * velocityMin;
-            }
+        	// we're using velocity as a probability of whether to change a 
+        	//     position or not rather than as an amount by which to change a position
+            velocity[i] = random.nextDouble();
         }
         
         bestPosition = new int[positionLength];

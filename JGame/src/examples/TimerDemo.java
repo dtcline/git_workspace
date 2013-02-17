@@ -2,6 +2,7 @@ package examples;
 
 import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.opengl.*;
+import org.lwjgl.util.Timer;
 import org.lwjgl.*;
 
 public class TimerDemo {
@@ -41,9 +42,12 @@ public class TimerDemo {
         
         lastFrame = getTime();
         
+        Timer timer = new Timer();
+        
         while(!Display.isCloseRequested()) {
             // Render
-            
+        	timer.tick();
+            System.out.println(timer.getTime());
             glClear(GL_COLOR_BUFFER_BIT);
             
             int delta = getDelta();
