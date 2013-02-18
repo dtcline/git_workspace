@@ -1,7 +1,10 @@
 #include <iostream>
+#include <time.h>
 using namespace std;
 
 int main() {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+	clock_t startTime = gettimeofday();
+	//cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+
 	return 0;
 }

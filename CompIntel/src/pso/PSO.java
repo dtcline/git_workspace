@@ -48,10 +48,10 @@ public final class PSO {
     
     public void run(int iterations) {
         Random random = new Random();
-        
+        boolean bestParticleUpdated = false;
+        int n = 0;
         for (int i = 0; i < iterations; i++) {
-            //int[] currentBestPosition = new int[bestPosition.length];
-            //double currentBestFitness = bestFitness;
+        	bestParticleUpdated = false;
             int[] currentBestPosition = bestParticle.getBestPosition();
             double currentBestFitness = bestParticle.getBestFitness();
         	
@@ -64,14 +64,14 @@ public final class PSO {
                     int populationPositionDiff = currentBestPosition[j] - currentIndividualPosition[j];
                     double velocity = individualVelocity[j] + (individualAcceleration * random.nextDouble() * individualPositionDiff)
                             + (populationAcceleration * random.nextDouble() * populationPositionDiff);
+                    velocity = 1 / (1 + Math.exp(-velocity));
                     if (velocity < velocityMin) {
                     	velocity = velocityMin;
                     }
                     else if (velocity > velocityMax) {
                     	velocity = velocityMax;
                     }
-                    //JOptionPane.showMessageDialog(new JFrame(), velocity);
-                    if (velocity < positionChangeChance) {
+                    if (velocity < random.nextDouble()) {
                     	if (currentIndividualPosition[j] == 1) {
                     		currentIndividualPosition[j] = 0;
                     	}
@@ -84,18 +84,27 @@ public final class PSO {
                 p.setCurrentPosition(currentIndividualPosition);
                 fitnessFunction.calculateFitness(p);
                 if (p.getCurrentFitness() > p.getBestFitness()) {
-                	p.setBestPosition(p.getBestPosition());
+                	p.setBestPosition(p.getCurrentPosition());
                 	p.setBestFitness(p.getCurrentFitness());
                 }
                 
                 if (p.getBestFitness() > currentBestFitness) {
-                	//bestPosition = p.getBestPosition();
-                	//bestFitness = p.getBestFitness();
                 	bestParticle = new Particle(p);
+                	bestParticleUpdated = true;
+                	n = 0;
                 }
             }
-            System.out.println("\n");
+            
+            if (!bestParticleUpdated) {
+            	n++;
+            }
+            
+            System.out.println("Iteration " + i + ":");
             printBestParticle();
+            
+            if (n == 200) {
+            	return;
+            }
         }
         
         
