@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public final class PSO {
 
     private List<Particle> population;
     private final MFDFitnessFunction fitnessFunction;
     private final double velocityMin;
-    private final double veolicityMax;
+    private final double velocityMax;
     private final double individualAcceleration;
     private final double populationAcceleration;
     private Particle bestParticle;
@@ -23,7 +26,7 @@ public final class PSO {
         bestPosition = new int[particleLength];
         
         this.velocityMin = velocityMin;
-        this.veolicityMax = velocityMax;
+        this.velocityMax = velocityMax;
         
         this.individualAcceleration = individualAcceleration;
         this.populationAcceleration = populationAcceleration;
@@ -61,6 +64,13 @@ public final class PSO {
                     int populationPositionDiff = currentBestPosition[j] - currentIndividualPosition[j];
                     double velocity = individualVelocity[j] + (individualAcceleration * random.nextDouble() * individualPositionDiff)
                             + (populationAcceleration * random.nextDouble() * populationPositionDiff);
+                    if (velocity < velocityMin) {
+                    	velocity = velocityMin;
+                    }
+                    else if (velocity > velocityMax) {
+                    	velocity = velocityMax;
+                    }
+                    //JOptionPane.showMessageDialog(new JFrame(), velocity);
                     if (velocity < positionChangeChance) {
                     	if (currentIndividualPosition[j] == 1) {
                     		currentIndividualPosition[j] = 0;
@@ -69,6 +79,7 @@ public final class PSO {
                     		currentIndividualPosition[j] = 1;
                     	}
                     }
+                    individualVelocity[j] = velocity;
                 }
                 p.setCurrentPosition(currentIndividualPosition);
                 fitnessFunction.calculateFitness(p);

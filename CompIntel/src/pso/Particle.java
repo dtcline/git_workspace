@@ -38,7 +38,8 @@ public final class Particle {
         System.arraycopy(p.currentPosition, 0, this.currentPosition, 0, p.currentPosition.length);
         this.bestPosition = new int[p.bestPosition.length];
         System.arraycopy(p.bestPosition, 0, this.bestPosition, 0, p.bestPosition.length);
-        this.velocity = p.velocity;
+        this.velocity = new double[p.velocity.length];
+        System.arraycopy(p.velocity, 0, this.velocity, 0, p.velocity.length);
     }
     
     
