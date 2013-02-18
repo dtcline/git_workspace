@@ -43,7 +43,7 @@ all: CompIntelCPP
 # Tool invocations
 CompIntelCPP: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
-	@echo 'Invoking: MacOS X C++ Linker'
+	@echo 'Invoking: MinGW C++ Linker'
 	g++  -o "CompIntelCPP" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
